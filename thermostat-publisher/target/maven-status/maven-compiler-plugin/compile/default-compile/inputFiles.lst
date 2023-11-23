@@ -1,0 +1,13 @@
+/Users/lucke/client-skeleton-java-spring-master/thermostat-publisher/src/main/java/eu/arrowhead/application/skeleton/publisher/security/PublisherAccessControlFilter.java
+/Users/lucke/client-skeleton-java-spring-master/thermostat-publisher/src/main/java/eu/arrowhead/application/skeleton/publisher/security/PublisherTokenSecurityFilter.java
+/Users/lucke/client-skeleton-java-spring-master/thermostat-publisher/src/main/java/eu/arrowhead/application/skeleton/publisher/event/EventTypeConstants.java
+/Users/lucke/client-skeleton-java-spring-master/thermostat-publisher/src/main/java/eu/arrowhead/application/skeleton/publisher/controller/PublisherController.java
+/Users/lucke/client-skeleton-java-spring-master/thermostat-publisher/src/main/java/eu/arrowhead/application/skeleton/publisher/constants/PublisherConstants.java
+/Users/lucke/client-skeleton-java-spring-master/thermostat-publisher/src/main/java/eu/arrowhead/application/skeleton/publisher/service/PublisherService.java
+/Users/lucke/client-skeleton-java-spring-master/thermostat-publisher/src/main/java/eu/arrowhead/application/skeleton/publisher/configuration/ContainerConfiguration.java
+/Users/lucke/client-skeleton-java-spring-master/thermostat-publisher/src/main/java/eu/arrowhead/application/skeleton/publisher/configuration/ContainerConfProperties.java
+/Users/lucke/client-skeleton-java-spring-master/thermostat-publisher/src/main/java/eu/arrowhead/application/skeleton/publisher/PublisherApplicationInitListener.java
+/Users/lucke/client-skeleton-java-spring-master/thermostat-publisher/src/main/java/eu/arrowhead/application/skeleton/publisher/PublisherMain.java
+/Users/lucke/client-skeleton-java-spring-master/thermostat-publisher/src/main/java/eu/arrowhead/application/skeleton/publisher/configuration/ConfigConstants.java
+/Users/lucke/client-skeleton-java-spring-master/thermostat-publisher/src/main/java/eu/arrowhead/application/skeleton/publisher/event/PresetEventType.java
+/Users/lucke/client-skeleton-java-spring-master/thermostat-publisher/src/main/java/eu/arrowhead/application/skeleton/publisher/security/PublisherSecurityConfig.java
