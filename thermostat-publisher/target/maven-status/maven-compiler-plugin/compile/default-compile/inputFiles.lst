@@ -1,3 +1,4 @@
+/Users/lucke/client-skeleton-java-spring-master/thermostat-publisher/src/main/java/eu/arrowhead/application/skeleton/publisher/service/DataService.java
 /Users/lucke/client-skeleton-java-spring-master/thermostat-publisher/src/main/java/eu/arrowhead/application/skeleton/publisher/security/PublisherAccessControlFilter.java
 /Users/lucke/client-skeleton-java-spring-master/thermostat-publisher/src/main/java/eu/arrowhead/application/skeleton/publisher/security/PublisherTokenSecurityFilter.java
 /Users/lucke/client-skeleton-java-spring-master/thermostat-publisher/src/main/java/eu/arrowhead/application/skeleton/publisher/event/EventTypeConstants.java

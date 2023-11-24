@@ -10,5 +10,6 @@ eu/arrowhead/application/skeleton/publisher/configuration/ContainerConfiguration
 eu/arrowhead/application/skeleton/publisher/controller/PublisherController.class
 eu/arrowhead/application/skeleton/publisher/PublisherMain.class
 eu/arrowhead/application/skeleton/publisher/configuration/ContainerConfProperties.class
+eu/arrowhead/application/skeleton/publisher/service/DataService.class
 eu/arrowhead/application/skeleton/publisher/PublisherApplicationInitListener.class
 eu/arrowhead/application/skeleton/publisher/security/PublisherSecurityConfig.class

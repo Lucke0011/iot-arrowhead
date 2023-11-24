@@ -1,0 +1,15 @@
+eu/arrowhead/application/skeleton/subscriber/security/SubscriberSecurityConfig.class
+META-INF/spring-configuration-metadata.json
+eu/arrowhead/application/skeleton/subscriber/configuration/ContainerConfiguration.class
+eu/arrowhead/application/skeleton/subscriber/constants/SubscriberDefaults.class
+eu/arrowhead/application/skeleton/subscriber/ConfigEventProperites.class
+eu/arrowhead/application/skeleton/subscriber/security/SubscriberAccessControlFilter.class
+eu/arrowhead/application/skeleton/subscriber/SubscriberApplicationInitListener.class
+eu/arrowhead/application/skeleton/subscriber/controller/SubscriberController.class
+eu/arrowhead/application/skeleton/subscriber/SubscriberMain.class
+eu/arrowhead/application/skeleton/subscriber/constants/SubscriberConstants.class
+eu/arrowhead/application/skeleton/subscriber/security/SubscriberTokenSecurityFilter.class
+eu/arrowhead/application/skeleton/subscriber/security/SubscriberNotificationAccessControlFilter.class
+eu/arrowhead/application/skeleton/subscriber/configuration/ContainerConfProperties.class
+eu/arrowhead/application/skeleton/subscriber/SubscriberUtilities.class
+eu/arrowhead/application/skeleton/subscriber/configuration/ConfigConstants.class

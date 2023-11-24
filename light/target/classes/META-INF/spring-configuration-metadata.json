@@ -1,0 +1,68 @@
+{
+  "groups": [
+    {
+      "name": "container",
+      "type": "eu.arrowhead.application.skeleton.subscriber.configuration.ContainerConfProperties",
+      "sourceType": "eu.arrowhead.application.skeleton.subscriber.configuration.ContainerConfProperties"
+    },
+    {
+      "name": "event",
+      "type": "eu.arrowhead.application.skeleton.subscriber.ConfigEventProperites",
+      "sourceType": "eu.arrowhead.application.skeleton.subscriber.ConfigEventProperites"
+    }
+  ],
+  "properties": [
+    {
+      "name": "client_system_name",
+      "type": "java.lang.String",
+      "description": "A description for 'client_system_name'"
+    },
+    {
+      "name": "container.max-keep-alive-requests",
+      "type": "java.lang.Integer",
+      "sourceType": "eu.arrowhead.application.skeleton.subscriber.configuration.ContainerConfProperties",
+      "defaultValue": 0
+    },
+    {
+      "name": "container.max_keep_alive_requests",
+      "type": "java.lang.Integer",
+      "description": "A description for 'container.max_keep_alive_requests'"
+    },
+    {
+      "name": "event.event-type-u-r-i-map",
+      "type": "java.util.Map<java.lang.String,java.lang.String>",
+      "sourceType": "eu.arrowhead.application.skeleton.subscriber.ConfigEventProperites"
+    },
+    {
+      "name": "event.eventTypeURIMap.REQUEST_RECEIVED",
+      "type": "java.lang.String",
+      "description": "A description for 'event.eventTypeURIMap.REQUEST_RECEIVED'"
+    },
+    {
+      "name": "event.eventTypeURIMap.START_INIT",
+      "type": "java.lang.String",
+      "description": "A description for 'event.eventTypeURIMap.START_INIT'"
+    },
+    {
+      "name": "event.eventTypeURIMap.START_RUN",
+      "type": "java.lang.String",
+      "description": "A description for 'event.eventTypeURIMap.START_RUN'"
+    },
+    {
+      "name": "sr_address",
+      "type": "java.lang.String",
+      "description": "A description for 'sr_address'"
+    },
+    {
+      "name": "sr_port",
+      "type": "java.lang.String",
+      "description": "A description for 'sr_port'"
+    },
+    {
+      "name": "token.security.filter.enabled",
+      "type": "java.lang.Boolean",
+      "description": "A description for 'token.security.filter.enabled'"
+    }
+  ],
+  "hints": []
+}

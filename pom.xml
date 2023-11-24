@@ -26,7 +26,7 @@
 	<modules>
 	    <module>application-skeleton-consumer</module>
 	    <module>application-skeleton-provider</module>
-	    <module>application-skeleton-subscriber</module>
+	    <module>light</module>
 	    <module>thermostat-publisher</module>
   	</modules>
 	
@@ -47,6 +47,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 			<version>3.1.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.opencsv</groupId>
+			<artifactId>opencsv</artifactId>
+			<version>4.1</version>
 		</dependency>
 	</dependencies>
 	
