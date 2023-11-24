@@ -9,11 +9,16 @@ import java.security.PublicKey;
 import java.security.cert.CertificateException;
 import java.util.Base64;
 import java.util.Map;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
+import eu.arrowhead.application.skeleton.subscriber.constants.SubscriberConstants;
+import eu.arrowhead.common.dto.shared.EventDTO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
@@ -60,6 +65,19 @@ public class SubscriberApplicationInitListener extends ApplicationInitListener {
 	@Autowired
 	private ConfigEventProperites configEventProperites;
 
+	@Autowired
+	private ApplicationContext applicationContext;
+
+	@Bean( SubscriberConstants.NOTIFICATION_QUEUE )
+	public ConcurrentLinkedQueue<EventDTO> getNotificationQueue() {
+		return new ConcurrentLinkedQueue<>();
+	}
+
+	@Bean( SubscriberConstants.CONSUMER_TASK )
+	public LightSubscriptionTask getConsumerTask() {
+		return new LightSubscriptionTask();
+	}
+
 	//=================================================================================================
 	// methods
 
@@ -97,7 +115,8 @@ public class SubscriberApplicationInitListener extends ApplicationInitListener {
 			subscribeToPresetEvents();
 		}
 
-		//TODO: implement here any custom behavior on application start up
+		LightSubscriptionTask subscriptionTask = applicationContext.getBean(SubscriberConstants.CONSUMER_TASK, LightSubscriptionTask.class);
+		subscriptionTask.start();
 	}
 
 

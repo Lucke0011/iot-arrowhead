@@ -36,7 +36,7 @@ public class SubscriberController {
 	public void receivePublisherReceivedRequestEvent(@RequestBody final EventDTO event ) {	
 		logger.debug("receivePublisherReceivedRequestEvent started...");
 		
-		if (event.getEventType() == null) {			
+		if (event.getEventType() != null) {
 			logger.debug("EventType is null.");
 		}
 		
