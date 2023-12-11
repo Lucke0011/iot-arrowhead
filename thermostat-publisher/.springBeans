@@ -7,7 +7,7 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-		<config>java:eu/arrowhead/application/skeleton/publisher/PublisherMain</config>
+		<config>java:ai.aitia.thermostat.ThermostatMain</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

@@ -8,7 +8,7 @@
   	</parent>
 	
 	<artifactId>light-subscriber</artifactId>
-	<name>Arrowhead Subscriber Skeleton</name>
+	<name>Light Subscriber</name>
 	
 	<build>
 		<plugins>

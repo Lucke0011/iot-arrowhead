@@ -8,7 +8,7 @@
   	</parent>
 	
 	<artifactId>thermostat-publisher</artifactId>
-	<name>Arrowhead Publisher Skeleton</name>
+	<name>Thermostat Publisher</name>
 	
 	<build>
 		<plugins>

@@ -15,7 +15,8 @@
     {
       "name": "container.max-keep-alive-requests",
       "type": "java.lang.Integer",
-      "sourceType": "eu.arrowhead.application.skeleton.publisher.configuration.ContainerConfProperties"
+      "sourceType": "eu.arrowhead.application.skeleton.publisher.configuration.ContainerConfProperties",
+      "defaultValue": 0
     },
     {
       "name": "container.max_keep_alive_requests",
