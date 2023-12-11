@@ -26,7 +26,7 @@
 	<modules>
 	    <module>application-skeleton-consumer</module>
 	    <module>application-skeleton-provider</module>
-	    <module>light</module>
+	    <module>light-subscriber</module>
 	    <module>thermostat-publisher</module>
   	</modules>
 	

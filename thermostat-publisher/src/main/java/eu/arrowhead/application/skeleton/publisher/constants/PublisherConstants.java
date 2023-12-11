@@ -6,8 +6,7 @@ public class PublisherConstants {
 
 	public static final String START_INIT_EVENT_PAYLOAD= "InitStarted";
 	public static final String START_RUN_EVENT_PAYLOAD= "RunStarted";
-
-	public static final String THERMOSTAT_URI = "/thermostat";
+    public static final String PUBLISHER_DESTROYED_EVENT_PAYLOAD= "DestroyStarted";
 	
 	//=================================================================================================
 	// assistant methods
