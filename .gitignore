@@ -35,4 +35,5 @@ wrapper
 
 *.log
 
-
+*.p12
+/target

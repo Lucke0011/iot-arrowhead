@@ -34,13 +34,23 @@ public class ThermostatController {
 	public Double getTemperature() throws IOException {
         counter++;
 
+		List<Double> temperatureData = dataService.readTemperatureData();
+		Double temperature = temperatureData.get(counter);
+
 		publisherService.publish(
 				PresetEventType.REQUEST_RECEIVED,
 				Map.of(EventTypeConstants.EVENT_TYPE_REQUEST_RECEIVED_METADATA_REQUEST_TYPE, HttpMethod.GET.name()),
                 ThermostatConstants.THERMOSTAT_URI);
 
-		List<Double> temperatureData = dataService.readTemperatureData();
+		// if temp >= 20 publish warm: turn on light and turn off element
+		// if temp < 20 publish cold: turn off light and turn on element
+//		if (temperature >= 20) {
+//			publisherService.publish(
+//					PresetEventType.REQUEST_RECEIVED,
+//					Map.of(EventTypeConstants.EVENT_TYPE_REQUEST_RECEIVED_METADATA_REQUEST_TYPE, HttpMethod.GET.name()),
+//					ThermostatConstants.THERMOSTAT_URI);
+//		}
 
-        return temperatureData.get(counter);
+        return temperature;
 	}
 }

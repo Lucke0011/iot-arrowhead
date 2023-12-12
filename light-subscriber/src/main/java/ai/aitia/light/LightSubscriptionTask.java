@@ -25,7 +25,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 
-@Component("LightSubscriptionTask")
 public class LightSubscriptionTask extends Thread {
 
     private boolean interrupted = false;
