@@ -7,9 +7,7 @@ public class LightConstants {
     public static final String INTERFACE_INSECURE = "HTTP-INSECURE-JSON";
     public static final String HTTP_METHOD = "http-method";
 
-    public static final String GET_THERMOSTAT_SERVICE_DEFINITION = "get-thermostat";
-    public static final String $REORCHESTRATION_WD = "${reorchestration:false}";
-    public static final String $MAX_RETRY_WD = "${max_retry:300}";
+    public static final String EVENT_TYPE_NOTIFICATION = "notification";
 
     private LightConstants() {
         throw new UnsupportedOperationException();

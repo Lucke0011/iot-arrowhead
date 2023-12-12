@@ -89,8 +89,8 @@ public class ThermostatApplicationInitListener extends ApplicationInitListener {
 		}
 
         //Register services into ServiceRegistry
-        final ServiceRegistryRequestDTO getThermostatServiceRequest = createServiceRegistryRequest(ThermostatConstants.GET_THERMOSTAT_SERVICE_DEFINITION, ThermostatConstants.THERMOSTAT_URI, HttpMethod.GET);
-        arrowheadService.forceRegisterServiceToServiceRegistry(getThermostatServiceRequest);
+        final ServiceRegistryRequestDTO thermostatServiceRequest = createServiceRegistryRequest(ThermostatConstants.GET_THERMOSTAT_SERVICE_DEFINITION, ThermostatConstants.THERMOSTAT_URI, HttpMethod.GET);
+        arrowheadService.forceRegisterServiceToServiceRegistry(thermostatServiceRequest);
 
         if (arrowheadService.echoCoreSystem(CoreSystem.EVENTHANDLER)) {
             arrowheadService.updateCoreServiceURIs(CoreSystem.EVENTHANDLER);
@@ -153,30 +153,5 @@ public class ThermostatApplicationInitListener extends ApplicationInitListener {
         serviceRegistryRequest.setMetadata(new HashMap<>());
         serviceRegistryRequest.getMetadata().put(ThermostatConstants.HTTP_METHOD, httpMethod.name());
         return serviceRegistryRequest;
-    }
-
-    private void publishDestroyedEvent() {
-        final String eventType = PresetEventType.PUBLISHER_DESTROYED.getEventTypeName();
-
-        final SystemRequestDTO source = new SystemRequestDTO();
-        source.setSystemName(applicationSystemName);
-        source.setAddress(applicationSystemAddress);
-        source.setPort(applicationSystemPort);
-        if (sslEnabled) {
-            source.setAuthenticationInfo(Base64.getEncoder().encodeToString(arrowheadService.getMyPublicKey().getEncoded()));
-        }
-
-        final Map<String,String> metadata = null;
-        final String payload = PublisherConstants.PUBLISHER_DESTROYED_EVENT_PAYLOAD;
-        final String timeStamp = Utilities.convertZonedDateTimeToUTCString( ZonedDateTime.now() );
-
-        final EventPublishRequestDTO publishRequestDTO = new EventPublishRequestDTO(
-                eventType,
-                source,
-                metadata,
-                payload,
-                timeStamp);
-
-        arrowheadService.publishToEventHandler(publishRequestDTO);
     }
 }

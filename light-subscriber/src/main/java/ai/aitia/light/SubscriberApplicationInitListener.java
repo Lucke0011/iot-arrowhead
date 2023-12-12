@@ -8,8 +8,6 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.cert.CertificateException;
 import java.util.Base64;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -24,7 +22,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 
 import ai.aitia.arrowhead.application.library.ArrowheadService;
@@ -39,9 +36,6 @@ import eu.arrowhead.common.exception.InvalidParameterException;
 
 @Component
 public class SubscriberApplicationInitListener extends ApplicationInitListener {
-
-	//=================================================================================================
-	// members
 
 	@Autowired
 	private ArrowheadService arrowheadService;
@@ -77,15 +71,13 @@ public class SubscriberApplicationInitListener extends ApplicationInitListener {
 		return new LightSubscriptionTask();
 	}
 
-	@Bean( SubscriberConstants.NOTIFICATION_QUEUE )
-	public ConcurrentLinkedQueue<EventDTO> getNotificationQueue() {
-		return new ConcurrentLinkedQueue<>();
-	}
-
-	//=================================================================================================
-	// methods
+    @Bean( SubscriberConstants.NOTIFICATION_QUEUE )
+    public ConcurrentLinkedQueue<EventDTO> getNotificationQueue() {
+        return new ConcurrentLinkedQueue<>();
+    }
 
 	//-------------------------------------------------------------------------------------------------
+
 	@Override
 	protected void customInit(final ContextRefreshedEvent event) {
 		checkConfiguration();
@@ -114,10 +106,7 @@ public class SubscriberApplicationInitListener extends ApplicationInitListener {
 
 		}
 
-		//Register services into ServiceRegistry
-		final SystemRegistryRequestDTO getThermostatServiceRequest = createSystemRegistryRequest();
-		arrowheadService.forceRegisterServiceToServiceRegistry(getThermostatServiceRequest);
-
+		//Register system into ServiceRegistry manually
 
 		if (arrowheadService.echoCoreSystem(CoreSystem.EVENTHANDLER)) {
 			arrowheadService.updateCoreServiceURIs(CoreSystem.EVENTHANDLER);
@@ -128,91 +117,9 @@ public class SubscriberApplicationInitListener extends ApplicationInitListener {
 		subscriptionTask.start();
 	}
 
-
 	//-------------------------------------------------------------------------------------------------
 
-	private ServiceRegistryRequestDTO createServiceRegistryRequest(final String serviceDefinition, final String serviceUri, final HttpMethod httpMethod) {
-		final ServiceRegistryRequestDTO serviceRegistryRequest = new ServiceRegistryRequestDTO();
-		serviceRegistryRequest.setServiceDefinition(serviceDefinition);
-		final SystemRequestDTO systemRequest = new SystemRequestDTO();
-		systemRequest.setSystemName(applicationSystemName);
-		systemRequest.setAddress(applicationSystemAddress);
-		systemRequest.setPort(applicationSystemPort);
-
-		if (sslEnabled && tokenSecurityFilterEnabled) {
-			systemRequest.setAuthenticationInfo(Base64.getEncoder().encodeToString(arrowheadService.getMyPublicKey().getEncoded()));
-			serviceRegistryRequest.setSecure(ServiceSecurityType.TOKEN.name());
-			serviceRegistryRequest.setInterfaces(List.of(ThermostatConstants.INTERFACE_SECURE));
-		} else if (sslEnabled) {
-			systemRequest.setAuthenticationInfo(Base64.getEncoder().encodeToString(arrowheadService.getMyPublicKey().getEncoded()));
-			serviceRegistryRequest.setSecure(ServiceSecurityType.CERTIFICATE.name());
-			serviceRegistryRequest.setInterfaces(List.of(ThermostatConstants.INTERFACE_SECURE));
-		} else {
-			serviceRegistryRequest.setSecure(ServiceSecurityType.NOT_SECURE.name());
-			serviceRegistryRequest.setInterfaces(List.of(ThermostatConstants.INTERFACE_INSECURE));
-		}
-		serviceRegistryRequest.setProviderSystem(systemRequest);
-		serviceRegistryRequest.setServiceUri(serviceUri);
-		serviceRegistryRequest.setMetadata(new HashMap<>());
-		serviceRegistryRequest.getMetadata().put(ThermostatConstants.HTTP_METHOD, httpMethod.name());
-		return serviceRegistryRequest;
-	}
-
-	@Override
-	public void customDestroy() {
-
-		final Map<String, String> eventTypeMap = configEventProperites.getEventTypeURIMap();
-		if( eventTypeMap == null) {
-			logger.info("No preset events to unsubscribe.");
-		} else {
-			for (final String eventType : eventTypeMap.keySet()) {
-				arrowheadService.unsubscribeFromEventHandler(eventType, applicationSystemName, applicationSystemAddress, applicationSystemPort);
-			}
-		}
-
-        if (lightSubscriptionTask() != null) {
-            lightSubscriptionTask().destroy();
-        }
-	}
-
-	//=================================================================================================
-	// assistant methods
-	
-	//-------------------------------------------------------------------------------------------------
-	private void checkConfiguration() {
-		if (!sslEnabled && tokenSecurityFilterEnabled) {			 
-			logger.warn("Contradictory configuration:");
-			logger.warn("token.security.filter.enabled=true while server.ssl.enabled=false");
-		}
-	}
-
-	//-------------------------------------------------------------------------------------------------
-	private void setTokenSecurityFilter() {
-
-		final PublicKey authorizationPublicKey = arrowheadService.queryAuthorizationPublicKey();
-		if (authorizationPublicKey == null) {
-			throw new ArrowheadException("Authorization public key is null");
-		}
-
-		KeyStore keystore;
-		try {
-			keystore = KeyStore.getInstance(sslProperties.getKeyStoreType());
-			keystore.load(sslProperties.getKeyStore().getInputStream(), sslProperties.getKeyStorePassword().toCharArray());
-		} catch (KeyStoreException | NoSuchAlgorithmException | CertificateException | IOException ex) {
-			throw new ArrowheadException(ex.getMessage());
-		}
-		final PrivateKey subscriberPrivateKey = Utilities.getPrivateKey(keystore, sslProperties.getKeyPassword());
-
-		final Map<String, String> eventTypeMap = configEventProperites.getEventTypeURIMap();
-
-		subscriberSecurityConfig.getTokenSecurityFilter().setEventTypeMap( eventTypeMap );
-		subscriberSecurityConfig.getTokenSecurityFilter().setAuthorizationPublicKey(authorizationPublicKey);
-		subscriberSecurityConfig.getTokenSecurityFilter().setMyPrivateKey(subscriberPrivateKey);
-
-	}
-
-	//-------------------------------------------------------------------------------------------------
-	private void subscribeToPresetEvents() {
+    private void subscribeToPresetEvents() {
 
 		final Map<String, String> eventTypeMap = configEventProperites.getEventTypeURIMap();
 
@@ -248,7 +155,32 @@ public class SubscriberApplicationInitListener extends ApplicationInitListener {
 	}
 
 	//-------------------------------------------------------------------------------------------------
-	private void setNotificationFilter() {
+
+    private void setTokenSecurityFilter() {
+
+        final PublicKey authorizationPublicKey = arrowheadService.queryAuthorizationPublicKey();
+        if (authorizationPublicKey == null) {
+            throw new ArrowheadException("Authorization public key is null");
+        }
+
+        KeyStore keystore;
+        try {
+            keystore = KeyStore.getInstance(sslProperties.getKeyStoreType());
+            keystore.load(sslProperties.getKeyStore().getInputStream(), sslProperties.getKeyStorePassword().toCharArray());
+        } catch (KeyStoreException | NoSuchAlgorithmException | CertificateException | IOException ex) {
+            throw new ArrowheadException(ex.getMessage());
+        }
+        final PrivateKey subscriberPrivateKey = Utilities.getPrivateKey(keystore, sslProperties.getKeyPassword());
+
+        final Map<String, String> eventTypeMap = configEventProperites.getEventTypeURIMap();
+
+        subscriberSecurityConfig.getTokenSecurityFilter().setEventTypeMap( eventTypeMap );
+        subscriberSecurityConfig.getTokenSecurityFilter().setAuthorizationPublicKey(authorizationPublicKey);
+        subscriberSecurityConfig.getTokenSecurityFilter().setMyPrivateKey(subscriberPrivateKey);
+
+    }
+
+    private void setNotificationFilter() {
 		logger.debug("setNotificationFilter started...");
 
 		final Map<String, String> eventTypeMap = configEventProperites.getEventTypeURIMap();
@@ -257,5 +189,10 @@ public class SubscriberApplicationInitListener extends ApplicationInitListener {
 		subscriberSecurityConfig.getNotificationFilter().setServerCN(arrowheadService.getServerCN());
 	}
 
-
+    private void checkConfiguration() {
+        if (!sslEnabled && tokenSecurityFilterEnabled) {
+            logger.warn("Contradictory configuration:");
+            logger.warn("token.security.filter.enabled=true while server.ssl.enabled=false");
+        }
+    }
 }

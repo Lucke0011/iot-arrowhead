@@ -25,31 +25,13 @@ public class SubscriberController {
 
 	private final Logger logger = LogManager.getLogger(SubscriberController.class);
 	
-	//=================================================================================================
-	// methods
+	//-------------------------------------------------------------------------------------------------
 
-	//-------------------------------------------------------------------------------------------------
-	@GetMapping(path = CommonConstants.ECHO_URI)
-	public String echoService() {
-		return "Got it!";
-	}
-	
-	//-------------------------------------------------------------------------------------------------
-	@PostMapping(path = SubscriberConstants.REQUEST_RECEIVED_NOTIFICATION_URI) 
-	public void receiveEventRequestReceived(@RequestBody final EventDTO event ) {
-		logger.debug("receiveEventRequestReceived started...");
+	@PostMapping(path = SubscriberConstants.EVENT_RECEIVED_NOTIFICATION_URI)
+	public void receiveEvent(@RequestBody final EventDTO event ) {
+		logger.info("Received Event");
 		
 		if (event.getEventType() != null) {
-            notificationQueue.add(event);
-		}
-	}
-	
-	//-------------------------------------------------------------------------------------------------
-	@PostMapping(path = SubscriberConstants.PUBLISHER_DESTROYED_NOTIFICATION_URI)
-	public void receiveEventDestroyed(@RequestBody final EventDTO event) {
-		logger.debug("receiveEventDestroyed started... ");
-		
-		if (event.getEventType() == null) {
             notificationQueue.add(event);
 		}
 	}

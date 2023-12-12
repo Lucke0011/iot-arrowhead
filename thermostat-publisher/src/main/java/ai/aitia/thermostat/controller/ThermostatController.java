@@ -37,10 +37,11 @@ public class ThermostatController {
 		List<Double> temperatureData = dataService.readTemperatureData();
 		Double temperature = temperatureData.get(counter);
 
+
 		publisherService.publish(
-				PresetEventType.REQUEST_RECEIVED,
-				Map.of(EventTypeConstants.EVENT_TYPE_REQUEST_RECEIVED_METADATA_REQUEST_TYPE, HttpMethod.GET.name()),
-                ThermostatConstants.THERMOSTAT_URI);
+				PresetEventType.NOTIFICATION,
+				Map.of(EventTypeConstants.NOTIFICATION, HttpMethod.GET.name()),
+                ThermostatConstants.WARM);
 
 		// if temp >= 20 publish warm: turn on light and turn off element
 		// if temp < 20 publish cold: turn off light and turn on element

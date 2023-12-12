@@ -10,6 +10,8 @@ public class EventTypeConstants {
 	public static final String EVENT_TYPE_REQUEST_RECEIVED = "REQUEST_RECEIVED";
 	public static final String EVENT_TYPE_REQUEST_RECEIVED_METADATA_REQUEST_TYPE = "REQUEST_TYPE";
     public static final String EVENT_TYPE_PUBLISHER_DESTROYED = "PUBLISHER_DESTROYED";
+
+    public static final String NOTIFICATION = "NOTIFICATION";
 	
 	//=================================================================================================
 	// assistant methods

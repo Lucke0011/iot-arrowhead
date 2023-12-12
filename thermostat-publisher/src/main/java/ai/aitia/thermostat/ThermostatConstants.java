@@ -13,6 +13,9 @@ public class ThermostatConstants {
     public static final int DEFAULT_SERVICE_LIMIT=1000;
     public static final String $SERVICE_LIMIT_WD="${"+SERVICE_LIMIT+":"+DEFAULT_SERVICE_LIMIT+"}";
 
+    public static final String WARM = "warm";
+    public static final String COLD = "cold";
+
     private ThermostatConstants() {
         throw new UnsupportedOperationException();
     }
