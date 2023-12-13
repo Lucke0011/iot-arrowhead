@@ -30,28 +30,24 @@ public class ThermostatController {
 	private DataService dataService;
     private final Logger logger = LogManager.getLogger(ThermostatController.class);
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "temperature")
 	public Double getTemperature() throws IOException {
         counter++;
 
 		List<Double> temperatureData = dataService.readTemperatureData();
 		Double temperature = temperatureData.get(counter);
 
-
-		publisherService.publish(
-				PresetEventType.NOTIFICATION,
-				Map.of(EventTypeConstants.NOTIFICATION, HttpMethod.GET.name()),
-                ThermostatConstants.WARM);
-
-		// if temp >= 20 publish warm: turn on light and turn off element
-		// if temp < 20 publish cold: turn off light and turn on element
-//		if (temperature >= 20) {
-//			publisherService.publish(
-//					PresetEventType.REQUEST_RECEIVED,
-//					Map.of(EventTypeConstants.EVENT_TYPE_REQUEST_RECEIVED_METADATA_REQUEST_TYPE, HttpMethod.GET.name()),
-//					ThermostatConstants.THERMOSTAT_URI);
-//		}
-
+		if (temperature >= 20.0) {
+			publisherService.publish(
+					PresetEventType.NOTIFICATION,
+					Map.of(EventTypeConstants.NOTIFICATION, HttpMethod.GET.name()),
+					ThermostatConstants.WARM);
+		} else {
+			publisherService.publish(
+					PresetEventType.NOTIFICATION,
+					Map.of(EventTypeConstants.NOTIFICATION, HttpMethod.GET.name()),
+					ThermostatConstants.COLD);
+		}
         return temperature;
 	}
 }
