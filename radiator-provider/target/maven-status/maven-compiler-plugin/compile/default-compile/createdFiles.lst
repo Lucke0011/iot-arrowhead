@@ -1,0 +1,10 @@
+eu\arrowhead\application\skeleton\provider\configuration\ContainerConfiguration.class
+eu\arrowhead\application\skeleton\provider\security\ProviderTokenSecurityFilter.class
+eu\arrowhead\application\skeleton\provider\ProviderMain.class
+META-INF\spring-configuration-metadata.json
+eu\arrowhead\application\skeleton\provider\configuration\ContainerConfProperties.class
+eu\arrowhead\application\skeleton\provider\security\ProviderAccessControlFilter.class
+eu\arrowhead\application\skeleton\provider\ProviderApplicationInitListener.class
+eu\arrowhead\application\skeleton\provider\security\ProviderSecurityConfig.class
+eu\arrowhead\application\skeleton\provider\controller\ProviderController.class
+eu\arrowhead\application\skeleton\provider\configuration\ConfigConstants.class

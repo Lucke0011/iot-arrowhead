@@ -25,7 +25,7 @@
 	
 	<modules>
 	    <module>application-skeleton-consumer</module>
-	    <module>application-skeleton-provider</module>
+	    <module>radiator-provider</module>
 	    <module>light-subscriber</module>
         <module>radiator-controller-subscriber</module>
 	    <module>thermostat-publisher</module>
