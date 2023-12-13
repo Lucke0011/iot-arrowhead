@@ -25,6 +25,7 @@
 wrapper
 /application-skeleton-provider/target
 /application-skeleton-consumer/target
+/radiator-controller-subscriber/target
 /thermostat-publisher/target
 /light-subscriber/target
 /mvnw
