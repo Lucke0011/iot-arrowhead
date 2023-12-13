@@ -49,13 +49,13 @@ public class RadiatorControllerSubscriptionTask extends Thread {
                     throw new InvalidParameterException("Incorrect event type");
                 }
 
-                if (Objects.equals(eventDTO.getPayload(), "warm")) {
+                if (Objects.equals(eventDTO.getPayload(), "cold")) {
                     if (!Objects.equals(status, "on")) {
                         status = "on";
                         callRadiator(RadiatorControllerConstants.TURN_ON_RADIATOR_SERVICE_DEFINITION);
                         logger.info("Radiator is turned on!");
                     }
-                } else if (Objects.equals(eventDTO.getPayload(), "cold")) {
+                } else if (Objects.equals(eventDTO.getPayload(), "warm")) {
                     if (!Objects.equals(status, "off")) {
                         status = "off";
                         callRadiator(RadiatorControllerConstants.TURN_OFF_RADIATOR_SERVICE_DEFINITION);
