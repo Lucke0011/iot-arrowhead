@@ -8,7 +8,7 @@
   	</parent>
 	
 	<artifactId>radiator-provider</artifactId>
-	<name>Arrowhead Provider Skeleton</name>
+	<name>Radiator Provider</name>
 	
 	<build>
 		<plugins>

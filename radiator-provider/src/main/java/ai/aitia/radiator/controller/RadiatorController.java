@@ -1,10 +1,7 @@
 package ai.aitia.radiator.controller;
 
 import ai.aitia.radiator.RadiatorConstants;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import eu.arrowhead.common.CommonConstants;
 
@@ -12,12 +9,12 @@ import eu.arrowhead.common.CommonConstants;
 @RequestMapping(RadiatorConstants.RADIATOR_URI)
 public class RadiatorController {
 
-    @PostMapping(path = RadiatorConstants.TURN_ON_RADIATOR_SERVICE_DEFINITION)
+    @PostMapping()
     public String turnOn() {
         return "Radiator turned on!";
     }
 
-    @PostMapping(path = RadiatorConstants.TURN_OFF_RADIATOR_SERVICE_DEFINITION)
+    @PutMapping()
     public String turnOff() {
         return "Radiator turned off!";
     }

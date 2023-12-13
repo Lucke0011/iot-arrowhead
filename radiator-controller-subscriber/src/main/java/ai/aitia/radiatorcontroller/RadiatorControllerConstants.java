@@ -9,8 +9,9 @@ public class RadiatorControllerConstants {
 
     public static final String EVENT_TYPE_NOTIFICATION = "NOTIFICATION";
 
-    public static final String TURN_ON_RADIATOR_SERVICE_DEFINITION = "radiator-turn-on";
-    public static final String TURN_OFF_RADIATOR_SERVICE_DEFINITION = "radiator-turn-off";
+    public static final String RADIATOR_SERVICE = "radiator";
+    public static final String TURN_ON_RADIATOR_SERVICE_URI = "radiator-turn-on";
+    public static final String TURN_OFF_RADIATOR_SERVICE_URI = "radiator-turn-off";
 
     private RadiatorControllerConstants() {
         throw new UnsupportedOperationException();

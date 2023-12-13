@@ -7,7 +7,6 @@ import eu.arrowhead.common.Utilities;
 import eu.arrowhead.common.dto.shared.*;
 import eu.arrowhead.common.exception.InvalidParameterException;
 import eu.arrowhead.common.dto.shared.OrchestrationFlags.Flag;
-import eu.arrowhead.common.dto.shared.OrchestrationFormRequestDTO.Builder;
 import org.apache.logging.log4j.LogManager;
 
 import javax.annotation.Resource;
@@ -52,13 +51,13 @@ public class RadiatorControllerSubscriptionTask extends Thread {
                 if (Objects.equals(eventDTO.getPayload(), "cold")) {
                     if (!Objects.equals(status, "on")) {
                         status = "on";
-                        callRadiator(RadiatorControllerConstants.TURN_ON_RADIATOR_SERVICE_DEFINITION);
+                        callRadiator(RadiatorControllerConstants.TURN_ON_RADIATOR_SERVICE_URI);
                         logger.info("Radiator is turned on!");
                     }
                 } else if (Objects.equals(eventDTO.getPayload(), "warm")) {
                     if (!Objects.equals(status, "off")) {
                         status = "off";
-                        callRadiator(RadiatorControllerConstants.TURN_OFF_RADIATOR_SERVICE_DEFINITION);
+                        callRadiator(RadiatorControllerConstants.TURN_OFF_RADIATOR_SERVICE_URI);
                         logger.info("Radiator is turned off!");
                     }
                 }
@@ -70,24 +69,16 @@ public class RadiatorControllerSubscriptionTask extends Thread {
         }
     }
 
-    private void callRadiator(final String service) {
+    private void callRadiator(String service) {
         OrchestrationResultDTO orchestrationResult = orchestrateService(service);
 
         logger.info("Change radiator status:");
         assert orchestrationResult != null;
         final String authToken = orchestrationResult.getAuthorizationTokens() == null ? null : orchestrationResult.getAuthorizationTokens().get(getInterface());
 
-        boolean result = false;
-
-        if (Objects.equals(service, RadiatorControllerConstants.TURN_ON_RADIATOR_SERVICE_DEFINITION)) {
-            result = arrowheadService.consumeServiceHTTP(Boolean.class, HttpMethod.valueOf(orchestrationResult.getMetadata().get(RadiatorControllerConstants.HTTP_METHOD)),
-                    orchestrationResult.getProvider().getAddress(), orchestrationResult.getProvider().getPort(), orchestrationResult.getServiceUri(),
-                    getInterface(), authToken, null);
-        } else if (Objects.equals(service, RadiatorControllerConstants.TURN_OFF_RADIATOR_SERVICE_DEFINITION)) {
-            result = arrowheadService.consumeServiceHTTP(Boolean.class, HttpMethod.valueOf(orchestrationResult.getMetadata().get(RadiatorControllerConstants.HTTP_METHOD)),
-                    orchestrationResult.getProvider().getAddress(), orchestrationResult.getProvider().getPort(), orchestrationResult.getServiceUri(),
-                    getInterface(), authToken, null);
-        }
+        final String result = arrowheadService.consumeServiceHTTP(String.class, HttpMethod.valueOf(orchestrationResult.getMetadata().get(RadiatorControllerConstants.HTTP_METHOD)),
+                orchestrationResult.getProvider().getAddress(), orchestrationResult.getProvider().getPort(), orchestrationResult.getServiceUri(),
+                getInterface(), authToken, null);
 
         logger.info(service + " request successful: " + result);
     }
@@ -101,9 +92,8 @@ public class RadiatorControllerSubscriptionTask extends Thread {
 
         final OrchestrationFormRequestDTO.Builder orchestrationFormRequest = arrowheadService.getOrchestrationFormBuilder();
         final OrchestrationFormRequestDTO orchestrationFormRequestDTO = orchestrationFormRequest.requestedService(serviceQueryForm)
-                .flag(Flag.MATCHMAKING, false)
+                .flag(Flag.MATCHMAKING, true)
                 .flag(Flag.OVERRIDE_STORE, true)
-                .flag(Flag.PING_PROVIDERS, true)
                 .build();
 
         System.out.println(Utilities.toPrettyJson(Utilities.toJson(orchestrationFormRequestDTO)));

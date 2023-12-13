@@ -24,7 +24,6 @@
   	</licenses>
 	
 	<modules>
-	    <module>application-skeleton-consumer</module>
 	    <module>radiator-provider</module>
 	    <module>light-subscriber</module>
         <module>radiator-controller-subscriber</module>
