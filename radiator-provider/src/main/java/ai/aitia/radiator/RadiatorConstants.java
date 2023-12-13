@@ -12,6 +12,10 @@ public class RadiatorConstants {
     public static final String $SERVICE_LIMIT_WD="${"+SERVICE_LIMIT+":"+DEFAULT_SERVICE_LIMIT+"}";
 
     public static final String RADIATOR_URI = "/radiator";
+    public static final String TURN_ON_RADIATOR_SERVICE = "/radiator-turn-on";
+    public static final String TURN_OFF_RADIATOR_SERVICE = "/radiator-turn-off";
+
+
     public static final String TURN_ON_RADIATOR_SERVICE_URI = "radiator-turn-on";
     public static final String TURN_OFF_RADIATOR_SERVICE_URI = "radiator-turn-off";
 

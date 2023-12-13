@@ -80,9 +80,11 @@ public class RadiatorApplicationInitListener extends ApplicationInitListener {
 		}
 
         //Register services into ServiceRegistry
+        //final ServiceRegistryRequestDTO radiatorOnServiceRequest = createServiceRegistryRequest(RadiatorConstants.TURN_ON_RADIATOR_SERVICE_URI, RadiatorConstants.RADIATOR_URI + RadiatorConstants.TURN_ON_RADIATOR_SERVICE, HttpMethod.POST);
         final ServiceRegistryRequestDTO radiatorOnServiceRequest = createServiceRegistryRequest(RadiatorConstants.TURN_ON_RADIATOR_SERVICE_URI, RadiatorConstants.RADIATOR_URI, HttpMethod.POST);
         arrowheadService.forceRegisterServiceToServiceRegistry(radiatorOnServiceRequest);
 
+        //final ServiceRegistryRequestDTO radiatorOnServiceRequest = createServiceRegistryRequest(RadiatorConstants.TURN_OFF_RADIATOR_SERVICE_URI, RadiatorConstants.RADIATOR_URI + RadiatorConstants.TURN_OFF_RADIATOR_SERVICE, HttpMethod.POST);
         final ServiceRegistryRequestDTO radiatorOffServiceRequest = createServiceRegistryRequest(RadiatorConstants.TURN_OFF_RADIATOR_SERVICE_URI, RadiatorConstants.RADIATOR_URI, HttpMethod.POST);
         arrowheadService.forceRegisterServiceToServiceRegistry(radiatorOffServiceRequest);
 
